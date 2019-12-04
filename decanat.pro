@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,9 +26,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        Control/application.cpp \
+        Control/contextdb.cpp \
         main.cpp
 
-HEADERS +=
+HEADERS += \
+    Control/application.h \
+    Control/contextdb.h \
+    Entity/faculty.h \
+    Entity/group.h \
+    Entity/specialty.h \
+    Entity/student.h \
+    Models/faculty.h \
+    Models/group.h \
+    Models/specialty.h \
+    Models/student.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
