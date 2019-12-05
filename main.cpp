@@ -1,14 +1,9 @@
 #include <QApplication>
-#include "Control/contextdb.h"
+#include "Control/application.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ContextDb * db = new ContextDb();
-    if( db->connect())
-    {
-        qDebug() << "подключение удалось";
-    }
-
+    Application *app = new Application;
     return a.exec();
 }

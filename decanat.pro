@@ -28,15 +28,25 @@ CONFIG += c++11
 SOURCES += \
         Control/application.cpp \
         Control/contextdb.cpp \
+        Control/departmentcontrol.cpp \
+        Control/groupcontrol.cpp \
+        Control/specialtycontrol.cpp \
+        Control/studentcontrol.cpp \
+        Interface/menu.cpp \
         main.cpp
 
 HEADERS += \
     Control/application.h \
     Control/contextdb.h \
-    Entity/faculty.h \
+    Control/departmentcontrol.h \
+    Control/groupcontrol.h \
+    Control/specialtycontrol.h \
+    Control/studentcontrol.h \
+    Entity/department.h \
     Entity/group.h \
     Entity/specialty.h \
     Entity/student.h \
+    Interface/menu.h \
     Models/faculty.h \
     Models/group.h \
     Models/specialty.h \

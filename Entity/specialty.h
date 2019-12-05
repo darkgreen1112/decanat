@@ -4,7 +4,7 @@
 struct Specialty
 {
     int uuid;           //уникальный идентификатор специальности
-    int uuidFaculty;    //уникальный идентификатор факультета
+    int uuidDepartment;    //уникальный идентификатор кафедры
     QString number;         //номер специальности
     QString name;           //наименование специальности
 };
