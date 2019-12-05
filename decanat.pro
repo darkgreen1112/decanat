@@ -32,6 +32,10 @@ SOURCES += \
         Control/groupcontrol.cpp \
         Control/specialtycontrol.cpp \
         Control/studentcontrol.cpp \
+        Entity/department.cpp \
+        Entity/group.cpp \
+        Entity/specialty.cpp \
+        Entity/student.cpp \
         Interface/menu.cpp \
         main.cpp
 
@@ -46,11 +50,7 @@ HEADERS += \
     Entity/group.h \
     Entity/specialty.h \
     Entity/student.h \
-    Interface/menu.h \
-    Models/faculty.h \
-    Models/group.h \
-    Models/specialty.h \
-    Models/student.h
+    Interface/menu.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
