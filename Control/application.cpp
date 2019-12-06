@@ -13,15 +13,27 @@ Application::Application()
 
 Application::~Application()
 {
+    if (menu) delete menu;
 
+    delete context;
+
+    if (student) { delete student; }
+    if (group) { delete group; }
+    if (specialty) { delete specialty; }
+    if (department) { delete department; }
+
+    if (buttonStudent) { delete buttonStudent; }
+    if (buttonGroup) { delete buttonGroup; }
+    if (buttonSpecialty) { delete buttonSpecialty; }
+    if (buttonDepartment) { delete buttonDepartment; }
 }
 
 void Application::InitializationWindow()
 {
-    QPushButton* buttonStudent = new QPushButton("Студент");
-    QPushButton* buttonGroup = new QPushButton("Группа");
-    QPushButton* buttonSpecialty = new QPushButton("Специальность");
-    QPushButton* buttonDepartment = new QPushButton("Кафедра");
+    buttonStudent = new QPushButton("Студент");
+    buttonGroup = new QPushButton("Группа");
+    buttonSpecialty = new QPushButton("Специальность");
+    buttonDepartment = new QPushButton("Кафедра");
 
     connect(buttonStudent, SIGNAL(clicked()), this, SLOT(studentControl()));
     connect(buttonGroup, SIGNAL(clicked()), this, SLOT(groupControl()));
@@ -43,20 +55,32 @@ void Application::InitializationWindow()
 
 void Application::studentControl()
 {
-    qDebug() << "открывается окно со студентами";
+    student = new StudentControl(*context);
+    menu->close();
+    student->show();
+    menu->show();
 }
 
 void Application::groupControl()
 {
-    qDebug() << "открывается окно с группами";
+    group = new GroupControl(*context);
+    menu->close();
+    group->show();
+    menu->show();
 }
 
 void Application::specialtyControl()
 {
-    qDebug() << "открывается окно со специальностями";
+    specialty = new SpecialtyControl(*context);
+    menu->close();
+    specialty->show();
+    menu->show();
 }
 
 void Application::departmentControl()
 {
-    qDebug() << "открывается окно с кафедрами";
+    department = new DepartmentControl(*context);
+    menu->close();
+    department->show();
+    menu->show();
 }

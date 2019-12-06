@@ -24,10 +24,19 @@ public slots:
 
 private:
     void InitializationWindow();
+
+private:
     Menu *menu;
+
     ContextDb * context;
+
     StudentControl * student;
     GroupControl * group;
     SpecialtyControl * specialty;
     DepartmentControl * department;
+
+    QPushButton* buttonStudent;
+    QPushButton* buttonGroup;
+    QPushButton* buttonSpecialty;
+    QPushButton* buttonDepartment;
 };
