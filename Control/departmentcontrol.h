@@ -1,6 +1,8 @@
 #pragma once
 #include "Control/contextdb.h"
 #include "Interface/listview.h"
+#include "Interface/changerecord.h"
+#include "recordchangemode.h"
 
 class DepartmentControl : public QObject
 {
@@ -18,7 +20,7 @@ public slots:
     void delRecord();
 private:
     ListView * listView;
-
+    ChangeRecord * changeRecord;
     ContextDb context;
 };
 

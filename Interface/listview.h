@@ -1,11 +1,13 @@
 #pragma once
-#include <QDialog>
+#include <QWidget>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QTableView>
+#include <QSqlQueryModel>
+#include <QHeaderView>
 
-class ListView : public QDialog
+class ListView : public QWidget
 {
     Q_OBJECT
 public:
@@ -15,10 +17,10 @@ public:
     QHBoxLayout& getLayoutButton();
     QVBoxLayout& getLayoutList();
     QTableView&  getTable();
+    void setupModel(const QStringList &headers, QSqlQueryModel &model);
 
 signals:
     void addRecord();
-    void delRecord();
 
 private:
     QVBoxLayout * layoutGlobal;
@@ -26,7 +28,7 @@ private:
     QVBoxLayout * layoutList;
 
     QPushButton * buttonAdd;
-    QPushButton * buttonDel;
 
     QTableView  * table;
+
 };

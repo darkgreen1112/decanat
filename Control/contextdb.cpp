@@ -6,7 +6,7 @@ ContextDb::ContextDb()
 }
 ContextDb::~ContextDb()
 {
-
+    delete model;
 }
 
 bool ContextDb::connect()
@@ -18,6 +18,7 @@ bool ContextDb::connect()
         db.setDatabaseName("F:/gitExtensions/decanat/decanat.db");
         if(db.open())
         {
+            model = new QSqlQueryModel();
             return true;
         }
         else
@@ -35,4 +36,27 @@ bool ContextDb::connect()
 void ContextDb::disconnect()
 {
     db.close();
+}
+
+QSqlQueryModel& ContextDb::setupModelDepartment()
+{
+    model->setQuery("select * from Department");
+    return * model;
+}
+
+QSqlQueryModel& ContextDb::setupModelSpecialty()
+{
+    model->setQuery("select * from Specialty");
+    return * model;
+}
+
+QSqlQueryModel& ContextDb::setupModelGroup()
+{
+    model->setQuery("select * from Party");
+    return * model;
+}
+QSqlQueryModel& ContextDb::setupModelStudent()
+{
+    model->setQuery("select * from Student");
+    return * model;
 }

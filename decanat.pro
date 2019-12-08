@@ -36,6 +36,7 @@ SOURCES += \
         Entity/group.cpp \
         Entity/specialty.cpp \
         Entity/student.cpp \
+        Interface/changerecord.cpp \
         Interface/listview.cpp \
         Interface/menu.cpp \
         main.cpp
@@ -51,8 +52,10 @@ HEADERS += \
     Entity/group.h \
     Entity/specialty.h \
     Entity/student.h \
+    Interface/changerecord.h \
     Interface/listview.h \
-    Interface/menu.h
+    Interface/menu.h \
+    recordchangemode.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

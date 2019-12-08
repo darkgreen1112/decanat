@@ -6,7 +6,8 @@
 #include <QSqlDatabase>
 #include <QFile>
 #include <QDebug>
-
+#include <QSqlQueryModel>
+#include <QMessageBox>
 class ContextDb
 {
 public:
@@ -14,6 +15,12 @@ public:
     ~ContextDb();
     bool connect();
     void disconnect();
+    QSqlQueryModel& setupModelDepartment();
+    QSqlQueryModel& setupModelSpecialty();
+    QSqlQueryModel& setupModelGroup();
+    QSqlQueryModel& setupModelStudent();
+
 private:
+    QSqlQueryModel * model;
     QSqlDatabase    db;
 };

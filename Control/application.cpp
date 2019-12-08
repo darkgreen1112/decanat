@@ -56,31 +56,23 @@ void Application::InitializationWindow()
 void Application::studentControl()
 {
     student = new StudentControl(*context);
-    menu->close();
     student->show();
-    menu->show();
 }
 
 void Application::groupControl()
 {
     group = new GroupControl(*context);
-    menu->close();
     group->show();
-    menu->show();
 }
 
 void Application::specialtyControl()
 {
     specialty = new SpecialtyControl(*context);
-    menu->close();
     specialty->show();
-    menu->show();
 }
 
 void Application::departmentControl()
 {
     department = new DepartmentControl(*context);
-    menu->close();
     department->show();
-    menu->show();
 }

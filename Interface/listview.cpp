@@ -6,13 +6,10 @@ ListView::ListView()
     setWindowFlags(Qt::Window);
 
     buttonAdd = new QPushButton("Добавить");
-    buttonDel = new QPushButton("Удалить");
     connect(buttonAdd, SIGNAL(clicked()), this, SIGNAL(addRecord()));
-    connect(buttonDel, SIGNAL(clicked()), this, SIGNAL(delRecord()));
 
     layoutButton = new QHBoxLayout();
     layoutButton->addWidget(buttonAdd);
-    layoutButton->addWidget(buttonDel);
 
     table = new QTableView();
     layoutList = new QVBoxLayout();
@@ -26,7 +23,31 @@ ListView::ListView()
 
 ListView::~ListView()
 {
+    delete layoutGlobal;
+    delete layoutButton;
+    delete layoutList;
 
+    delete buttonAdd;
+
+    delete table;
+}
+
+void ListView::setupModel(const QStringList &headers, QSqlQueryModel &model)
+{
+    for(int i = 0, j = 0; i < model.columnCount(); i++, j++){
+        model.setHeaderData(i,Qt::Horizontal,headers[j]);
+    }
+    table->setModel(& model);
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    table->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    //неизвестный зверь
+    table->setSelectionMode(QAbstractItemView::SingleSelection);
+
+    table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    table->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    table->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+    table->setColumnHidden(0,true);
 }
 
 QVBoxLayout& ListView::getLayoutGlobal()
