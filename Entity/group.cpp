@@ -9,7 +9,7 @@ void Group::setUuid(int _uuid)
     uuid = _uuid;
 }
 
-void Group::setUuidSpecialty(int _uuidSpecialty)
+void Group::setUuidSpecialty(QString _uuidSpecialty)
 {
     uuidSpecialty = _uuidSpecialty;
 }
@@ -24,7 +24,7 @@ int Group::getUuid()
     return uuid;
 }
 
-int Group::getUuidSpecialty()
+QString Group::getUuidSpecialty()
 {
     return uuidSpecialty;
 }

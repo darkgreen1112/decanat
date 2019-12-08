@@ -3,7 +3,6 @@
 #include "Control/contextdb.h"
 #include "Interface/listview.h"
 #include "Interface/changerecord.h"
-#include "recordchangemode.h"
 
 class SpecialtyControl : public QObject
 {

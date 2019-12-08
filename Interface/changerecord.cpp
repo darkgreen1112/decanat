@@ -50,7 +50,9 @@ void ChangeRecord::initializationWidgetsData()
         widgetsDepartment->labelNumber.setText("<center>№</center>");
         widgetsDepartment->labelName.setText("<center>Наименование</center>");
         widgetsDepartment->lineEditNumber.setMaximumHeight(100);
+        widgetsDepartment->lineEditNumber.setValidator(new QIntValidator(0, 99999));
         widgetsDepartment->lineEditName.setMaximumHeight(100);
+        widgetsDepartment->lineEditName.setValidator(new QRegExpValidator(QRegExp("^([А-Я][а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})")));
 
         layoutData->addWidget(& widgetsDepartment->labelNumber);
         layoutData->addWidget(& widgetsDepartment->lineEditNumber);
@@ -64,8 +66,10 @@ void ChangeRecord::initializationWidgetsData()
         widgetsSpecialty->labelNumber.setText("<center>Код специальности</center>");
         widgetsSpecialty->labelName.setText("<center>Наименование</center>");
         widgetsSpecialty->lineEditDepartment.setMaximumHeight(100);
+        widgetsSpecialty->lineEditDepartment.setValidator(new QIntValidator(0, 99999));
         widgetsSpecialty->lineEditNumber.setMaximumHeight(50);
         widgetsSpecialty->lineEditName.setMaximumHeight(100);
+        widgetsSpecialty->lineEditName.setValidator(new QRegExpValidator(QRegExp("^([А-Я][а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})([а-я]{1,100})([ ]{0,2})")));
 
         layoutData->addWidget(& widgetsSpecialty->labelDepartment);
         layoutData->addWidget(& widgetsSpecialty->lineEditDepartment);
@@ -97,10 +101,13 @@ void ChangeRecord::initializationWidgetsData()
         widgetsStudent->lineEditNumber.setMaximumHeight(50);
         widgetsStudent->labelSurname.setText("<center>Фамилия</center>");
         widgetsStudent->lineEditSurname.setMaximumHeight(50);
+        widgetsStudent->lineEditSurname.setValidator(new QRegExpValidator(QRegExp("[А-Я][а-я]{1,100}")));
         widgetsStudent->labelName.setText("<center>Имя</center>");
         widgetsStudent->lineEditName.setMaximumHeight(50);
+        widgetsStudent->lineEditName.setValidator(new QRegExpValidator(QRegExp("[А-Я][а-я]{1,100}")));
         widgetsStudent->patronymic.setText("<center>Отчество</center>");
         widgetsStudent->lineEditPatronymic.setMaximumHeight(50);
+        widgetsStudent->lineEditPatronymic.setValidator(new QRegExpValidator(QRegExp("[А-Я][а-я]{1,100}")));
         widgetsStudent->labelOrder.setText("<center>Приказ №</center>");
         widgetsStudent->lineEditOrder.setMaximumHeight(50);
 

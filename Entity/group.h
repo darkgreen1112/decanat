@@ -3,16 +3,17 @@
 
 class Group
 {
+public:
     explicit Group();
     void setUuid(int _uuid);
-    void setUuidSpecialty(int _uuidSpecialty);
+    void setUuidSpecialty(QString _uuidSpecialty);
     void setNumber(QString _number);
     int getUuid();
-    int getUuidSpecialty();
+    QString getUuidSpecialty();
     QString getNumber();
 
 private:
     int uuid;               //уникальный идентификатор группы
-    int uuidSpecialty;      //уникальный идентификатор специальности
+    QString uuidSpecialty;      //уникальный идентификатор специальности
     QString number;             //номер группы
 };

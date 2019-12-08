@@ -158,7 +158,6 @@ bool ContextDb::changeSpecialty(Specialty specialty)
     query.next();
     if (query.value(0) != 0)
     {
-        QSqlQuery query;
         if(query.exec("update Specialty set UuidDepartment = " +
                   QString::number(specialty.getUuidDepartment()) + " , Number ='" + specialty.getNumber() + "' ," +
                   "Name ='" + specialty.getName() + "' where uuid = " + QString::number(specialty.getUuid())))
@@ -182,6 +181,170 @@ bool ContextDb::delSpecialty(Specialty specialty)
 {
     QSqlQuery query;
     if(query.exec("delete from Specialty where uuid = " + QString::number(specialty.getUuid())))
+    {
+        model->setQuery(model->query().lastQuery());
+        return true;
+    }
+    else
+    {
+        qDebug() << query.lastError();
+        return false;
+    }
+}
+
+Group ContextDb::getRequestForGroup(int row)
+{
+    Group group;
+    group.setUuid(model->data(model->index(row, 0)).toInt());
+    group.setUuidSpecialty(model->data(model->index(row, 1)).toString());
+    group.setNumber(model->data(model->index(row, 2)).toString());
+    return group;
+}
+
+bool ContextDb::addGroup(Group group)
+{
+    QSqlQuery query;
+    query.exec("SELECT EXISTS (select * from Specialty where Number = '" + group.getUuidSpecialty() + "');");
+    query.next();
+    if (query.value(0) != 0)
+    {
+        if(query.exec("INSERT INTO Party (uuidSpecialty, Number)"
+                      "VALUES ('" + group.getUuidSpecialty() + "', " + group.getNumber() + ")"))
+        {
+            model->setQuery(model->query().lastQuery());
+            return true;
+        }
+        else
+        {
+            qDebug() << query.lastError();
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool ContextDb::changeGroup(Group group)
+{
+    QSqlQuery query;
+    query.exec("SELECT EXISTS (select * from Specialty where Number = '" + group.getUuidSpecialty() + "');");
+    query.next();
+    if (query.value(0) != 0)
+    {
+        if(query.exec("update Party set uuidSpecialty = '" +
+                  group.getUuidSpecialty() + "' , Number =" + group.getNumber() +
+                  " where uuid = " + QString::number(group.getUuid())))
+        {
+            model->setQuery(model->query().lastQuery());
+            return true;
+        }
+        else
+        {
+            qDebug() << query.lastError();
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool ContextDb::delGroup(Group group)
+{
+    QSqlQuery query;
+    if(query.exec("delete from Party where uuid = " + QString::number(group.getUuid())))
+    {
+        model->setQuery(model->query().lastQuery());
+        return true;
+    }
+    else
+    {
+        qDebug() << query.lastError();
+        return false;
+    }
+}
+
+Student ContextDb::getRequestForStudent(int row)
+{
+    Student student;
+    student.setUuid(model->data(model->index(row, 0)).toInt());
+    student.setUuidGroup(model->data(model->index(row, 1)).toInt());
+    student.setNumber(model->data(model->index(row, 2)).toString());
+    student.setSurname(model->data(model->index(row, 3)).toString());
+    student.setName(model->data(model->index(row, 4)).toString());
+    student.setPatronymic(model->data(model->index(row, 5)).toString());
+    student.setOrder(model->data(model->index(row, 6)).toString());
+    return student;
+}
+
+bool ContextDb::addStudent(Student student)
+{
+    QSqlQuery query;
+    query.exec("SELECT EXISTS (select * from Party where Number = " + QString::number(student.getUuidGroup()) + ");");
+    query.next();
+    if (query.value(0) != 0)
+    {
+        if(query.exec("INSERT INTO Student (uuidGroup, Number, Surname, Name, Patronymic, [Order])"
+                      "VALUES (" + QString::number(student.getUuidGroup()) + "," +
+                      "'" + student.getNumber() + "', " +
+                      "'" + student.getSurname() + "', " +
+                      "'" + student.getName() + "', " +
+                      "'" + student.getPatronymic() + "', " +
+                      "'" + student.getOrder() + "' )"))
+        {
+            model->setQuery(model->query().lastQuery());
+            return true;
+        }
+        else
+        {
+            qDebug() << query.lastError();
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool ContextDb::changeStudent(Student student)
+{
+    QSqlQuery query;
+    query.exec("SELECT EXISTS (select * from Party where Number = " + QString::number(student.getUuidGroup()) + ");");
+    query.next();
+    if (query.value(0) != 0)
+    {
+        QSqlQuery query;
+        if(query.exec("update Student set uuidGroup = " + QString::number(student.getUuidGroup())
+                      + ", Number = '" + student.getNumber() +
+                      + "', Surname = '" + student.getSurname()
+                      + "', Name = '" + student.getName()
+                      + "', Patronymic = '" + student.getPatronymic()
+                      + "', [Order] = '" + student.getOrder()
+                 + "' where uuid = " + QString::number(student.getUuid())))
+        {
+            model->setQuery(model->query().lastQuery());
+            return true;
+        }
+        else
+        {
+            qDebug() << query.lastError();
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool ContextDb::delStudent(Student student)
+{
+    QSqlQuery query;
+    if(query.exec("delete from Student where uuid = " + QString::number(student.getUuid())))
     {
         model->setQuery(model->query().lastQuery());
         return true;

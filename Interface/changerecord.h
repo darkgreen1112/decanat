@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QValidator>
 #include "recordchangemode.h"
 
 struct WidgetsDepartment;

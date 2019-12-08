@@ -1,9 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <QPushButton>
 #include "Interface/menu.h"
-#include "Control/contextdb.h"
 #include "Control/studentcontrol.h"
 #include "Control/groupcontrol.h"
 #include "Control/specialtycontrol.h"

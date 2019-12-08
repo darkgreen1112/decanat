@@ -31,6 +31,7 @@ void GroupControl::addRecord()
     listView->close();
     changeRecord = new ChangeRecord(RecordChangeMode::ModeGroup(), false);
     connect(changeRecord, SIGNAL(saveRecord()), this, SLOT(saveRecord()));
+    connect(changeRecord, SIGNAL(delRecord()), this, SLOT(delRecord()));
     changeRecord->show();
     changeRecord->exec();
     listView->show();
@@ -39,8 +40,14 @@ void GroupControl::addRecord()
 void GroupControl::editRecord()
 {
     listView->close();
-    changeRecord = new ChangeRecord(RecordChangeMode::ModeDepartment(), true);
+    changeRecord = new ChangeRecord(RecordChangeMode::ModeGroup(), true);
     connect(changeRecord, SIGNAL(saveRecord()), this, SLOT(saveRecord()));
+    connect(changeRecord, SIGNAL(delRecord()), this, SLOT(delRecord()));
+
+    group = context.getRequestForGroup(listView->getTable().currentIndex().row());
+    changeRecord->getWidgetsGroup().lineEditSpecialty.setText(group.getUuidSpecialty());
+    changeRecord->getWidgetsGroup().lineEditNumber.setText(group.getNumber());
+
     changeRecord->show();
     changeRecord->exec();
     listView->show();
@@ -48,5 +55,57 @@ void GroupControl::editRecord()
 
 void GroupControl::saveRecord()
 {
-    qDebug() << "сработало";
+    if(changeRecord->getWidgetsGroup().lineEditSpecialty.text() != "" && changeRecord->getWidgetsGroup().lineEditNumber.text() != "")
+    {
+        if(!changeRecord->getIsEdited())
+        {
+            group.setUuidSpecialty(changeRecord->getWidgetsGroup().lineEditSpecialty.text());
+            group.setNumber(changeRecord->getWidgetsGroup().lineEditNumber.text());
+            if (context.addGroup(group))
+            {
+                QMessageBox::information(nullptr, "Информация", "Запись добавлена");
+                changeRecord->close();
+            }
+            else
+            {
+                QMessageBox::information(nullptr, "Информация", "Запрос на добавление записи отклонен. \nПожалуйста проверьте правильность данных");
+            }
+        }
+        else
+        {
+            group.setUuidSpecialty(changeRecord->getWidgetsGroup().lineEditSpecialty.text());
+            group.setNumber(changeRecord->getWidgetsGroup().lineEditNumber.text());
+            if (context.changeGroup(group))
+            {
+                QMessageBox::information(nullptr, "Информация", "Запись изменена");
+                changeRecord->close();
+            }
+            else
+            {
+                QMessageBox::information(nullptr, "Информация", "Запрос на изменение записи отклонен. \nПожалуйста проверьте правильность данных");
+            }
+        }
+    }
+    else
+    {
+        QMessageBox::information(nullptr, "Информация", "Необходимо заполнить все поля");
+    }
+}
+
+void GroupControl::delRecord()
+{
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(nullptr, "Информация", "Пожалуйста подтвердите удаление записи", QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+    {
+        if (context.delGroup(group))
+        {
+            QMessageBox::information(nullptr, "Информация", "Запись удалена");
+            changeRecord->close();
+        }
+        else
+        {
+            QMessageBox::information(nullptr, "Информация", "Запрос на удаление записи отклонен. \nПожалуйста проверьте правильность данных");
+        }
+    }
 }
