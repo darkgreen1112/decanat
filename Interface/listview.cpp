@@ -12,6 +12,7 @@ ListView::ListView()
     layoutButton->addWidget(buttonAdd);
 
     table = new QTableView();
+    connect(table, SIGNAL(doubleClicked(QModelIndex)), this, SIGNAL(editRecord()));
     layoutList = new QVBoxLayout();
     layoutList->addWidget(table);
 

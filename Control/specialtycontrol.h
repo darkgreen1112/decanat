@@ -18,9 +18,14 @@ private:
 
 public slots:
     void addRecord();
+    void editRecord();
+    void saveRecord();
     void delRecord();
+
 private:
     ListView * listView;
     ChangeRecord * changeRecord;
     ContextDb context;
+
+    Specialty specialty;
 };

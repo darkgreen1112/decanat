@@ -18,7 +18,8 @@ private:
 
 public slots:
     void addRecord();
-    void delRecord();
+    void editRecord();
+    void saveRecord();
 private:
     ListView * listView;
     ChangeRecord * changeRecord;

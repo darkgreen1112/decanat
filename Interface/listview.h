@@ -6,6 +6,7 @@
 #include <QTableView>
 #include <QSqlQueryModel>
 #include <QHeaderView>
+#include <QDebug>
 
 class ListView : public QWidget
 {
@@ -21,6 +22,7 @@ public:
 
 signals:
     void addRecord();
+    void editRecord();
 
 private:
     QVBoxLayout * layoutGlobal;
